@@ -1,2 +1,5 @@
 // Life, Universe, and Everything
-var answer = 6 * 7;
+module.exports = function life() {
+    var answer = 6 * 7;
+    return answer;
+};
