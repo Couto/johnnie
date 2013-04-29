@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                 src: '<%= files.test %>',
                 options: {
                     ui: 'exports',
-                    reporter: 'nyan'
+                    reporter: 'spec'
                 }
             },
             coverage: {
