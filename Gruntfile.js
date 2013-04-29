@@ -9,13 +9,13 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         files: {
-            src: ['lib/**/*.js'],
+            src: ['index.js', 'lib/**/*.js'],
             test: ['test/**/*.js'],
             all: ['README.md', 'index.js', 'lib/**/*.js', 'test/**/*.js']
         },
 
         jshint: {
-            files: '<%= files. all %>',
+            files: '<%= files.all %>',
             options: {
                 jshintrc: '.jshintrc'
             }
@@ -36,8 +36,8 @@ module.exports = function (grunt) {
         },
 
         docco: {
-            sintra: {
-                files: { 'docs/documentation': '<%= files.src %>' },
+            johnnie: {
+                files: { 'docs/annotated': '<%= files.src %>' },
                 options: {
                     layout: 'parallel'
                 }
