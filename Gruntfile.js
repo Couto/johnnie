@@ -21,6 +21,16 @@ module.exports = function (grunt) {
             }
         },
 
+        watch: {
+            tests: {
+                files: '<%= files.all %>',
+                tasks: ['default'],
+                options: {
+                    nospawn: true
+                }
+            }
+        },
+
         clean: {
             docs: ['docs'],
             coverage: ['coverage']

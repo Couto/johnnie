@@ -1,6 +1,5 @@
 var assert = require('assert'),
-    createNode = require('../lib/node'),
-    typeOf = Object.prototype.toString;
+    createNode = require('../lib/node');
 
 module.exports = {
     'Node': {
@@ -52,9 +51,9 @@ module.exports = {
             },
             'returns siblings if present': function () {
                 // Create three random nodes
-                var nodes = Array(3).map(function () {
+                var nodes = [null, null, null].map(function () {
                     return createNode({
-                        type: 'MemberStatement',
+                        type: 'MemberExpression',
                         range: [Math.random() * 100, Math.random() * 100],
                         loc: {
                             start: Math.random() * 100,
@@ -62,15 +61,54 @@ module.exports = {
                         },
                         data: Math.random().toString(36).substring(7)
                     });
-                }).forEach(function (node, idx, arr) {
-                    // Connnect all nodes as siblings;
-                    node.prevSibling = arr[idx - 1] || null;
+                }).map(function (node, idx, arr) {
+                    // Connect nodes as siblings
                     node.nextSibling = arr[idx + 1] || null;
+                    return node;
                 });
+
+                // Assert brotherhood
+                assert.deepEqual(nodes[0].next(), nodes[1]);
+                assert.deepEqual(nodes[1].next(), nodes[2]);
+                assert.deepEqual(nodes[2].next(), null);
 
             }
         },
-        '#previous' : {},
+        '#previous' : {
+            'returns null if no siblings are present': function () {
+                var node = createNode({
+                    range: [26, 56],
+                    loc: {},
+                    type: 'DebuggerStatement'
+                });
+
+                assert.equal(node.previous(), null);
+            },
+            'returns siblings if present': function () {
+                // Create three random nodes
+                var nodes = [null, null, null].map(function () {
+                    return createNode({
+                        type: 'MemberExpression',
+                        range: [Math.random() * 100, Math.random() * 100],
+                        loc: {
+                            start: Math.random() * 100,
+                            end: Math.random() * 100
+                        },
+                        data: Math.random().toString(36).substring(7)
+                    });
+                }).map(function (node, idx, arr) {
+                    // Connect nodes as siblings
+                    node.prevSibling = arr[idx - 1] || null;
+                    return node;
+                });
+
+                // Assert brotherhood
+                assert.deepEqual(nodes[2].previous(), nodes[1]);
+                assert.deepEqual(nodes[1].previous(), nodes[0]);
+                assert.deepEqual(nodes[0].previous(), null);
+
+            }
+        },
         '#siblings' : {},
         '#child' : {},
         '#children' : {},

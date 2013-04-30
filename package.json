@@ -36,6 +36,7 @@
     "grunt-contrib-jshint": "~0.4.3",
     "grunt-plato": "~0.2.0",
     "grunt-cafe-mocha": "git://github.com/Couto/grunt-cafe-mocha.git#c2ac62df410e092e60d698161b47e5f2e28c79d5",
-    "cdir": "~0.1.2"
+    "cdir": "~0.1.2",
+    "grunt-contrib-watch": "~0.3.1"
   }
 }
